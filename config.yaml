@@ -1,0 +1,92 @@
+env: dev
+
+# 本地开发环境
+dev:
+  # 应用配置
+  app:
+    # 应用名称
+    name: Student Information Management System
+    # 应用描述
+    description: 学生信息管理系统，实现学生、管理员的登录、注册、信息管理等功能
+    # 应用接口
+    api: /api/v2
+    # 应用主机地址
+    host: 0.0.0.0
+    # 应用端口
+    port: 8000
+    # uvicorn应用入口
+    uvicorn: app.main:app
+    # 应用版本
+    version: 2.0.0
+    # 是否自动重载应用
+    reload: true
+
+  # 数据库配置
+  db:
+    # 数据库主机地址
+    host: localhost
+    # 数据库端口
+    port: 5433
+    # 数据库用户名
+    username: zachary
+    # 数据库密码
+    password: password
+    # 数据库名称
+    database: student_info
+    # 数据库连接驱动
+    driver_name: postgresql+asyncpg
+    # 是否开启sqlalchemy日志
+    echo: true
+    # 允许溢出连接池大小的最大连接数
+    max_overflow: 10
+    # 连接池大小，0表示连接数无限制
+    pool_size: 50
+    # 连接回收时间（单位：秒）
+    pool_recycle: 3600
+    # 连接池中没有线程可用时，最多等待的时间（单位：秒）
+    pool_timeout: 30
+
+  # Redis配置
+  redis:
+      # Redis主机地址
+      host: localhost
+      # Redis端口
+      port: 6378
+      # Redis用户名
+      username: ""
+      # Redis密码
+      password: ""
+      # Redis数据库索引
+      db: 0
+
+# 生产环境
+prod:
+  app:
+    name: Student Information Management System(prod)
+    description: 学生信息管理系统，实现学生、管理员的登录、注册、信息管理等功能
+    api: /api/v2
+    host: 0.0.0.0
+    port: 9999
+    uvicorn: app.main:app
+    version: 2.0.0
+    reload: false
+
+  db:
+    host: localhost
+    port: 5432
+    username: zachary
+    password: password
+    database: student_info
+    driver_name: postgresql+asyncpg
+    echo: true
+    max_overflow: 10
+    pool_size: 50
+    pool_recycle: 3600
+    pool_timeout: 30
+
+  redis:
+    host: localhost
+    port: 6379
+    username: ""
+    password: ""
+    db: 0
