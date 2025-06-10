@@ -5,7 +5,7 @@ from fastapi import FastAPI
 from app.core.config import get_config
 from app.core.postgresql import PsqlHandler
 from app.core.redis import RedisHandler
-from app.utils.log import log
+from app.utils.log import log, LogHelpers
 
 config = get_config()
 
@@ -16,6 +16,8 @@ async def startup_services(app: FastAPI):
     :param app: FastAPI应用程序实例
     """
 
+    # 初始化日志配置 拦截器
+    LogHelpers.init_config()
     # 初始化config
     app.state.config = config
     # 初始化数据库连接
