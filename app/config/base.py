@@ -1,5 +1,6 @@
 from pydantic_settings import BaseSettings
 from pydantic import SecretStr
+from sqlalchemy import URL
 
 class AppConfig(BaseSettings):
     """
@@ -51,6 +52,24 @@ class DatabaseConfig(BaseSettings):
     pool_recycle: int
     # 连接池中没有线程可用时，最多等待的时间（单位：秒）
     pool_timeout: int
+
+    @property
+    def sqlalchemy_database_uri(self) -> URL:
+        """
+        生成 SQLAlchemy 数据库连接 URI
+
+        :return: SQLAlchemy URI
+        """
+
+        return URL.create(
+            drivername=self.driver_name,
+            username=self.username,
+            password=self.password.get_secret_value(),
+            host=self.host,
+            port=self.port,
+            database=self.database
+        )
+
 
 
 class RedisConfig(BaseSettings):

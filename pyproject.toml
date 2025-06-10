@@ -9,10 +9,17 @@ readme = "README.md"
 python = "^3.10"
 fastapi = {extras = ["all"], version = "^0.115.12"}
 loguru = "^0.7.3"
+sqlalchemy = {extras = ["asyncio"], version = "^2.0.41"}
+asyncpg = "^0.30.0"
+redis = "^6.2.0"
 
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.4.0"
+pytest-asyncio = "^1.0.0"
+pytest-postgresql = "^7.0.2"
+psycopg = {extras = ["binary"], version = "^3.2.9"}
+fakeredis = "^2.29.0"
 
 [build-system]
 requires = ["poetry-core"]
