@@ -2,6 +2,7 @@ from pydantic_settings import BaseSettings
 from pydantic import SecretStr
 from sqlalchemy import URL
 
+
 class AppConfig(BaseSettings):
     """
     FastAPI的应用配置
@@ -67,9 +68,8 @@ class DatabaseConfig(BaseSettings):
             password=self.password.get_secret_value(),
             host=self.host,
             port=self.port,
-            database=self.database
+            database=self.database,
         )
-
 
 
 class RedisConfig(BaseSettings):
@@ -100,4 +100,3 @@ class BaseConfig(BaseSettings):
     db: DatabaseConfig
     # Redis配置
     redis: RedisConfig
-

@@ -35,7 +35,9 @@ class TestPsqlHandler:
         async with AsyncSession(async_engine) as session:
             # 创建临时表
             await session.execute(
-                text("CREATE TABLE IF NOT EXISTS test_table (id SERIAL PRIMARY KEY, username TEXT)")
+                text(
+                    "CREATE TABLE IF NOT EXISTS test_table (id SERIAL PRIMARY KEY, username TEXT)"
+                )
             )
             await session.commit()
 
@@ -54,7 +56,6 @@ class TestPsqlHandler:
             # 验证数据是否插入成功
             assert row is not None
 
-
     @pytest.mark.asyncio
     async def test_get_async_session(self, fake_async_engine):
         """
@@ -66,7 +67,6 @@ class TestPsqlHandler:
         session = PsqlHandler._get_async_session(fake_async_engine)
         assert isinstance(session, AsyncSession)
         await session.close()
-
 
     @pytest.mark.asyncio
     async def test_get_session(self, fake_async_engine):
@@ -83,5 +83,3 @@ class TestPsqlHandler:
         assert isinstance(session, AsyncGenerator)
         # 恢复原始的依赖项
         app.dependency_overrides = {}
-
-

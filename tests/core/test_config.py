@@ -42,13 +42,17 @@ def fake_config_file():
 
     # mock一些测试特定的值
     if "dev" in test_config:
-        test_config["dev"]["app"]["name"] = "Student Information Management System(dev)"
+        test_config["dev"]["app"]["name"] = (
+            "Student Information Management System(dev)"
+        )
         test_config["dev"]["app"]["port"] = 8000
         test_config["dev"]["app"]["reload"] = True
         test_config["dev"]["db"]["host"] = "localhost"
         test_config["dev"]["db"]["database"] = "dev-db"
     if "prod" in test_config:
-        test_config["prod"]["app"]["name"] = "Student Information Management System(prod)"
+        test_config["prod"]["app"]["name"] = (
+            "Student Information Management System(prod)"
+        )
         test_config["prod"]["app"]["port"] = 8001
         test_config["prod"]["app"]["reload"] = False
         test_config["prod"]["db"]["host"] = "prod-host"
@@ -102,7 +106,6 @@ class TestConfig:
         # 验证返回的是同一个对象
         assert config1 is config2
 
-
     def test_get_real_config_dev(self):
         """
         测试获取真实配置dev文件
@@ -120,7 +123,6 @@ class TestConfig:
         assert config.app.reload is True
         assert config.db.host == "localhost"
 
-
     def test_get_real_config_prod(self):
         """
         测试获取真实配置prod文件
@@ -137,5 +139,3 @@ class TestConfig:
         assert config.app.port == 9999
         assert config.app.reload is False
         assert config.db.host == "localhost"
-
-

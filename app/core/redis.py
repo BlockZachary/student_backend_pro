@@ -38,7 +38,9 @@ class RedisHandler:
         try:
             connection = await redis.ping()
             if not connection:
-                raise RedisError("Redis connection failed, ping returned False")
+                raise RedisError(
+                    "Redis connection failed, ping returned False"
+                )
             log.info("Redis Connection Initialized")
             return redis
         except AuthenticationError as e:
@@ -65,4 +67,3 @@ class RedisHandler:
 
         await redis.close()
         log.info("Redis Connection Closed")
-

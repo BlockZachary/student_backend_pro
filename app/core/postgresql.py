@@ -1,5 +1,11 @@
 from app.config.base import DatabaseConfig
-from sqlalchemy.ext.asyncio import AsyncEngine, AsyncAttrs, create_async_engine, AsyncSession, async_sessionmaker
+from sqlalchemy.ext.asyncio import (
+    AsyncEngine,
+    AsyncAttrs,
+    create_async_engine,
+    AsyncSession,
+    async_sessionmaker,
+)
 from sqlalchemy.orm import DeclarativeBase
 from fastapi import Depends
 from collections.abc import AsyncGenerator
@@ -13,7 +19,9 @@ class Base(AsyncAttrs, DeclarativeBase):
     """
     数据库基础模型
     """
+
     ...
+
 
 class PsqlHandler:
     """
@@ -71,7 +79,9 @@ class PsqlHandler:
         return engine
 
     @classmethod
-    async def get_session(cls, async_engine: AsyncEngine = Depends(get_engine_from_fastapi)) -> AsyncGenerator[AsyncSession, None]:
+    async def get_session(
+        cls, async_engine: AsyncEngine = Depends(get_engine_from_fastapi)
+    ) -> AsyncGenerator[AsyncSession, None]:
         """
         获取数据库会话
 
@@ -85,7 +95,6 @@ class PsqlHandler:
             finally:
                 await session.close()
 
-
     @classmethod
     async def close_conn_psql(cls, async_engine: AsyncEngine) -> None:
         """
@@ -96,15 +105,3 @@ class PsqlHandler:
 
         await async_engine.dispose()
         log.info("PostgreSQL Connection Closed")
-
-
-
-
-
-
-
-
-
-
-
-

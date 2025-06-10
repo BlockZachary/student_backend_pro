@@ -15,8 +15,10 @@ def fake_get_config():
 
     return get_config()
 
+
 # 利用 pytest-postgresql 定义一个数据库工厂
 postgresql_instance = factories.postgresql("postgresql_proc")
+
 
 @pytest.fixture(scope="function")
 async def postgresql_db(postgresql_instance):
@@ -28,6 +30,7 @@ async def postgresql_db(postgresql_instance):
     """
 
     return postgresql_instance
+
 
 @pytest.fixture(scope="function")
 async def fake_async_engine(postgresql_db):
@@ -46,6 +49,7 @@ async def fake_async_engine(postgresql_db):
     yield engine
     # 测试用例执行完毕后，关闭引擎
     await engine.dispose()
+
 
 @pytest.fixture(scope="function")
 async def fake_redis_client():
@@ -66,6 +70,7 @@ async def fake_redis_client():
     await fake_redis.flushall()
     await fake_redis.aclose()
 
+
 @pytest.fixture(scope="function")
 async def fake_redis_username():
     """
@@ -75,7 +80,3 @@ async def fake_redis_username():
     """
 
     return "test@mail.com"
-
-
-
-

@@ -1,0 +1,9 @@
+line-length = 79
+# 缩进宽度为4 spaces
+indent-width = 4
+
+[format]
+# 使用双引号
+quote-style = "double"
+# 缩进使用space
+indent-style = "space"
