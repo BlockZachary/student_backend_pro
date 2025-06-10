@@ -1,8 +1,8 @@
 import yaml
 from functools import lru_cache
-
 from app.config.base import BaseConfig
 from app.utils.profile import Profile
+
 
 @lru_cache
 def get_config(config_file="config.yaml", env=None) -> BaseConfig:

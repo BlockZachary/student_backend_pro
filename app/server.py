@@ -9,6 +9,7 @@ from app.utils.log import log, LogHelpers
 
 config = get_config()
 
+
 async def startup_services(app: FastAPI):
     """
     初始化服务
@@ -37,6 +38,7 @@ async def close_services(app: FastAPI):
     # 关闭Redis连接
     await RedisHandler.close_conn_redis(app.state.redis)
 
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """
@@ -63,6 +65,7 @@ app = FastAPI(
     version=config.app.version,
     lifespan=lifespan,
 )
+
 
 @app.get("/")
 async def hello():

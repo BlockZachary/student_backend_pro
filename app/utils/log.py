@@ -36,9 +36,16 @@ class LogHelper:
         )
 
     def init_config(self):
-        LOGGER_NAMES = ("uvicorn.asgi", "uvicorn.access", "uvicorn", "fastapi", "app", "sqlalchemy.log",
-                        "sqlalchemy.engine",
-                        "sqlalchemy.engine.Engine")
+        LOGGER_NAMES = (
+            "uvicorn.asgi",
+            "uvicorn.access",
+            "uvicorn",
+            "fastapi",
+            "app",
+            "sqlalchemy.log",
+            "sqlalchemy.engine",
+            "sqlalchemy.engine.Engine",
+        )
 
         # 清空跟日志记录器的处理器
         logging.getLogger().handlers = [InterceptHandler()]
@@ -57,6 +64,7 @@ class LogHelper:
         # 获取日志记录器实例，使用 lru_cache 缓存结果，避免重复创建
         return self.logger
 
+
 class InterceptHandler(logging.Handler):
     def emit(self, record: logging.LogRecord) -> None:
         # 将日志记录转换为 loguru 的日志格式
@@ -72,7 +80,8 @@ class InterceptHandler(logging.Handler):
             depth += 1
 
         logger.opt(depth=depth, exception=record.exc_info).log(
-            level, record.getMessage(),
+            level,
+            record.getMessage(),
         )
 
 

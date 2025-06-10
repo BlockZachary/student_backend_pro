@@ -20,6 +20,7 @@ pytest-asyncio = "^1.0.0"
 pytest-postgresql = "^7.0.2"
 psycopg = {extras = ["binary"], version = "^3.2.9"}
 fakeredis = "^2.29.0"
+ruff = "^0.11.13"
 
 [build-system]
 requires = ["poetry-core"]
