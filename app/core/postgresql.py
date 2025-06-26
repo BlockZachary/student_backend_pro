@@ -6,21 +6,11 @@ from sqlalchemy.ext.asyncio import (
     AsyncSession,
     async_sessionmaker,
 )
-from sqlalchemy.orm import DeclarativeBase
 from fastapi import Depends
 from collections.abc import AsyncGenerator
-
 from app.core.deps import get_engine_from_fastapi
+from app.models import Base
 from app.utils.log import log
-
-
-# TODO: Separate to Model Layer
-class Base(AsyncAttrs, DeclarativeBase):
-    """
-    数据库基础模型
-    """
-
-    ...
 
 
 class PsqlHandler:
